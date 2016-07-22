@@ -7,5 +7,24 @@
   },
   "dependencies": {
     "express": "^4.14.0"
-  }
+  },
+  "version": "1.0.0",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cderche/demo-pipeline.git"
+  },
+  "keywords": [
+    "heroku",
+    "pipeline",
+    "git",
+    "node",
+    "npm"
+  ],
+  "author": "Cyrille Derche",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cderche/demo-pipeline/issues"
+  },
+  "homepage": "https://github.com/cderche/demo-pipeline#readme"
 }
