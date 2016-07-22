@@ -6,9 +6,10 @@ var WORKERS = process.env.WEB_CONCURRENCY || 1
 // process.env.PORT lets the port be set by Heroku
 var PORT = process.env.PORT || 8080
 
-throng(start(id), {
-  worker:   WORKERS,
-  lifetime: Infinity
+throng({
+  workers:  WORKERS,
+  lifetime: Infinity,
+  start:    start
 })
 
 function start(workerId) {
