@@ -2,4 +2,4 @@
 demo for the heroku pipeline
 
 ### Concurrency
-We are using ```npm install --save throng``` for concurrency. Node will create variable ```WEB_CONCURRENCY``` instances (defaults to 1).
+We are using ```npm install --save throng``` for concurrency. Node will create ```WEB_CONCURRENCY``` instances (defaults to 1).
