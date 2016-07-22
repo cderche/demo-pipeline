@@ -1,5 +1,7 @@
-var throng  = require('throng')
-var express = require('express')
+var throng    = require('throng')
+var express   = require('express')
+var subdomain = require('express-subdomain')
+var api       = require('./api')
 
 // process.env.WEB_CONCURRENCY lets the port be set by Heroku
 var WORKERS = process.env.WEB_CONCURRENCY || 1
@@ -16,6 +18,8 @@ function start(workerId) {
   console.log(`Started worker ${workerId}`)
 
   var app     = express()
+
+  app.use(subdomain('api', api))
 
   app.get('/', function(req, res) {
     res.send(`Worker ${workerId} says: "Hello World!"`)
