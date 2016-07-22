@@ -22,7 +22,7 @@ function start(workerId) {
   })
 
   app.listen(PORT, function() {
-    console.log('Listening on port ', port)
+    console.log('Listening on port ', PORT)
   })
 
 }
