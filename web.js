@@ -1,7 +1,7 @@
 var throng    = require('throng')
 var express   = require('express')
-var subdomain = require('express-subdomain')
-var api       = require('./api')
+// var subdomain = require('./subdomain')
+var subdomains = require('wildcard-subdomains')
 
 // process.env.WEB_CONCURRENCY lets the port be set by Heroku
 var WORKERS = process.env.WEB_CONCURRENCY || 1
@@ -19,10 +19,15 @@ function start(workerId) {
 
   var app     = express()
 
-  app.use(subdomain('api', api))
+  app.use(subdomains())
+
+  app.get('/_sub/*', function(req, res) {
+    var subdomain = req.subdomains
+    res.send(subdomain)
+  })
 
   app.get('/', function(req, res) {
-    res.send(`Worker ${workerId} says: "Hello World!"`)
+    res.send(`Worker ${workerId}`)
   })
 
   app.listen(PORT, function() {
