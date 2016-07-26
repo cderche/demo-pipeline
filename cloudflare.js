@@ -2,7 +2,7 @@ if (!process.env.CF_EMAIL)  console.warn('Missing CF_EMAIL');
 if (!process.env.CF_KEY)    console.warn('Missing CF_KEY');
 if (!process.env.ZONE_NAME) console.warn('Missing ZONE_NAME');
 if (!process.env.APP_URL)   console.warn('Missing APP_URL');
-if (!process.env.NODE_ENV)   console.warn('Missing NODE_ENV');
+if (!process.env.NODE_ENV)  console.warn('Missing NODE_ENV');
 
 var cloudflare  = require('cloudflare')
 var client      = new cloudflare({
