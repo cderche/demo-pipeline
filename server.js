@@ -1,11 +1,14 @@
-var os  = require('os')
+var throng  = require('throng')
+var web     = require('./web');
 
-var CPU_COUNT       = os.cpus().length;
-var WEB_CONCURRENCY = process.env.WEB_CONCURRENCY || Math.round(CPU_COUNT / 2);
+var CONCURRENCY  = process.env.WEB_CONCURRENCY || 1
 
-var WEB_NODES       = Math.min(CPU_COUNT, WEB_CONCURRENCY)
-var WORKER_NODES    = CPU_COUNT - WEB_NODES
+throng({
+  workers:  CONCURRENCY,
+  start:    start
+})
 
-console.log(`CPU Count: ${CPU_COUNT}`);
-console.log(`Web Nodes: ${WEB_NODES}`);
-console.log(`Worker Nodes: ${WORKER_NODES}`);
+function start(id) {
+  console.log(`Starting web ${id}`);
+  var dyno = web(id)
+}
