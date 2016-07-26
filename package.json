@@ -7,6 +7,10 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+<<<<<<< HEAD
+    "cloudflare": "^1.0.4",
+=======
+>>>>>>> master
     "express": "^4.14.0",
     "express-subdomain": "^1.0.5",
     "heroku-client": "^3.0.0-beta2",

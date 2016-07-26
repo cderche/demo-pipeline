@@ -5,7 +5,12 @@ var bodyParser  = require('body-parser');
 
 var PORT        = process.env.PORT || 8080;
 
+<<<<<<< HEAD
+// var heroku      = require('./heroku');
+var cloudflare  = require('./cloudflare');
+=======
 var heroku      = require('./heroku');
+>>>>>>> master
 
 if (cluster.isMaster) {
 
@@ -30,6 +35,17 @@ if (cluster.isMaster) {
   app.get('/', function(req, res) {
     res.send(`Host: ${os.hostname()}, Worker: ${cluster.worker.id}, Subdomain: ${JSON.stringify(req.subdomains)}`);
   });
+
+  // Example HEROKU ADD DOMAIN
+  app.post('/cloudflare/domain', function(req, res) {
+    var name = req.body.name
+    cloudflare.addCName(name, function(err, response) {
+      console.log('back');
+      if (err) return res.negotiate(err);
+      res.end()
+    })
+
+  })
 
   app.listen(PORT, function() {
     console.log(`Worker ${cluster.worker.id} listening on ${PORT}`);
