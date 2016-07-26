@@ -5,6 +5,7 @@ var bodyParser  = require('body-parser');
 
 var PORT        = process.env.PORT || 8080;
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 // var heroku      = require('./heroku');
 var cloudflare  = require('./cloudflare');
@@ -12,6 +13,8 @@ var cloudflare  = require('./cloudflare');
 var heroku      = require('./heroku');
 >>>>>>> master
 
+=======
+>>>>>>> Stashed changes
 if (cluster.isMaster) {
 
   // Count the machine's CPUs
