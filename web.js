@@ -5,8 +5,12 @@ var bodyParser  = require('body-parser');
 
 var PORT        = process.env.PORT || 8080;
 
+<<<<<<< HEAD
 // var heroku      = require('./heroku');
 var cloudflare  = require('./cloudflare');
+=======
+var heroku      = require('./heroku');
+>>>>>>> master
 
 if (cluster.isMaster) {
 
