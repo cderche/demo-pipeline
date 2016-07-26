@@ -1,13 +1,16 @@
-var os          = require('os');
 var cluster     = require('cluster');
+var os          = require('os');
 var express     = require('express');
+var bodyParser  = require('body-parser');
 
 var PORT        = process.env.PORT || 8080;
+
+var heroku      = require('./heroku');
 
 if (cluster.isMaster) {
 
   // Count the machine's CPUs
-  var cpuCount = require('os').cpus().length;
+  var cpuCount = os.cpus().length;
 
   // Create a worker for each CPU
   for (var i = 0; i < cpuCount; i += 1) {
@@ -17,6 +20,7 @@ if (cluster.isMaster) {
 } else {
 
   var app  = express();
+  app.use(bodyParser.json());
 
   app.use(function(req, res, next) {
     console.log(`You are in subdomain ${JSON.stringify(req.subdomains)}!`);
