@@ -18,6 +18,7 @@ if (cluster.isMaster) {
    var app  = express();
    
    app.get('/', function(req, res) {
+      console.log(req.headers);
       res.send(`Host: ${os.hostname()}, Worker: ${cluster.worker.id}`);
    });
   
