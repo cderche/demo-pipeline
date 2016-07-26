@@ -1,28 +1,28 @@
-var throng  = require('throng')
-var express = require('express')
+var cluster = require('cluster');
+var express = require('express');
+var os      = require('os');
+var PORT    = process.env.PORT || 8080;
 
-// process.env.WEB_CONCURRENCY lets the port be set by Heroku
-var WORKERS = process.env.WEB_CONCURRENCY || 1
-// process.env.PORT lets the port be set by Heroku
-var PORT = process.env.PORT || 8080
-
-throng({
-  workers:  WORKERS,
-  lifetime: Infinity,
-  start:    start
-})
-
-function start(workerId) {
-  console.log(`Started worker ${workerId}`)
-
-  var app     = express()
-
-  app.get('/', function(req, res) {
-    res.send(`Worker ${workerId} says: "Hello World!"`)
-  })
-
+if (cluster.isMaster) {
+   
+   // Count the machine's CPUs
+   var cpuCount = require('os').cpus().length;
+   
+   // Create a worker for each CPU
+   for (var i = 0; i < cpuCount; i += 1) {
+      cluster.fork();
+   }
+   
+} else {
+   
+   var app  = express();
+   
+   app.get('/', function(req, res) {
+      res.send(`Host: ${os.hostname()}, Worker: ${cluster.worker.id}`);
+   });
+  
   app.listen(PORT, function() {
-    console.log('Listening on port ', PORT)
-  })
-
+    console.log(`Worker ${cluster.worker.id} listening on ${PORT}`);
+  });
+  
 }
