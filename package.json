@@ -7,15 +7,9 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-<<<<<<< HEAD
     "cloudflare": "^1.0.4",
-=======
->>>>>>> master
     "express": "^4.14.0",
-    "express-subdomain": "^1.0.5",
-    "heroku-client": "^3.0.0-beta2",
-    "throng": "^4.0.0",
-    "wildcard-subdomains": "^1.0.0"
+    "heroku-client": "^3.0.0-beta2"
   },
   "version": "1.0.0",
   "devDependencies": {},
