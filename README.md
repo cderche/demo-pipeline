@@ -22,6 +22,7 @@ process()     | 2     | 1         | Permanent
 create()      | 1     | N/A       | Temporary
 
 We have broken our jobs out into different types, each type will cost a connection to redis:
+
 Type    | Concurrency | Notes
 ----    | ----------- | -----
 small   | 50          | emails
