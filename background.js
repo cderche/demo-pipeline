@@ -1,7 +1,5 @@
 var throng  = require('throng');
-
-var kue   = require('./job_queue').kue
-var queue = require('./job_queue').queue
+var jobs   = require('./jobs')
 
 var CONCURRENCY  = process.env.WORKER_CONCURRENCY || 1
 
@@ -13,13 +11,13 @@ throng({
 
 function master() {
   console.log('Started master');
-  kue.app.listen(3000)
+  require('kue').app.listen(3000)
 }
 
 function start(id) {
   console.log(`Starting worker ${id}`);
 
-  queue.process('video', 2, function(job, done){
+  jobs.process('video', 2, function(job, done){
     var pending = 20
       , total = pending;
 
@@ -31,7 +29,7 @@ function start(id) {
     }, 1000);
   });
 
-  queue.process('email', 10, function(job, done){
+  jobs.process('email', 10, function(job, done){
     var pending = 5
       , total = pending;
 

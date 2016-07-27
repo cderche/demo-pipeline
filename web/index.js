@@ -1,4 +1,4 @@
-var queue       = require('.././job_queue').queue
+var jobs        =  require('.././jobs')
 
 var os          = require('os')
 var express     = require('express')
@@ -21,7 +21,7 @@ module.exports = function(id) {
   });
 
   web.get('/email', function(req, res) {
-    var job = queue.create('email', {
+    var job = jobs.create('email', {
       title:  'sending an email',
     }).save( function(err){
       if( !err ) console.log( job.id );
@@ -31,7 +31,7 @@ module.exports = function(id) {
   })
 
   web.get('/video', function(req, res) {
-    var job = queue.create('video', {
+    var job = jobs.create('video', {
       title:  'processing a video',
     }).save( function(err){
       if( !err ) console.log( job.id );
