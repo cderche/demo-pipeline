@@ -1,5 +1,4 @@
 var throng  = require('throng');
-var jobs   = require('./jobs')
 
 var CONCURRENCY  = process.env.WORKER_CONCURRENCY || 1
 
@@ -10,26 +9,15 @@ throng({
 })
 
 function master() {
-  console.log('Started master');
-  require('kue').app.listen(3000)
+  console.log('Worker master');
+  // require('kue').app.listen(3000)
 }
 
 function start(id) {
   console.log(`Starting worker ${id}`);
+  var jobs = require('./jobs')
 
-  jobs.process('video', 2, function(job, done){
-    var pending = 20
-      , total = pending;
-
-    var interval = setInterval(function(){
-      job.log('converting!');
-      job.progress(total - pending, total);
-      --pending || done();
-      pending || clearInterval(interval);
-    }, 1000);
-  });
-
-  jobs.process('email', 10, function(job, done){
+  jobs.process('small', 50, function(job, done){
     var pending = 5
       , total = pending;
 
@@ -40,4 +28,29 @@ function start(id) {
       pending || clearInterval(interval);
     }, 1000);
   });
+
+  jobs.process('medium', 25, function(job, done){
+    var pending = 25
+      , total = pending;
+
+    var interval = setInterval(function(){
+      job.log('sending!');
+      job.progress(total - pending, total);
+      --pending || done();
+      pending || clearInterval(interval);
+    }, 1000);
+  });
+
+  jobs.process('large', 5, function(job, done){
+    var pending = 50
+      , total = pending;
+
+    var interval = setInterval(function(){
+      job.log('sending!');
+      job.progress(total - pending, total);
+      --pending || done();
+      pending || clearInterval(interval);
+    }, 1000);
+  });
+
 }

@@ -1,5 +1,3 @@
-var jobs        =  require('.././jobs')
-
 var os          = require('os')
 var express     = require('express')
 var bodyParser  = require('body-parser')
@@ -7,6 +5,7 @@ var bodyParser  = require('body-parser')
 var PORT        = process.env.PORT || 8080;
 
 module.exports = function(id) {
+  var jobs = require('.././jobs')
   var web = express()
   web.use(bodyParser.json());
 
