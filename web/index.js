@@ -19,24 +19,15 @@ module.exports = function(id) {
     res.send(`Host: ${os.hostname()}, Worker: ${id}, Subdomain: ${JSON.stringify(req.subdomains)}`);
   });
 
-  web.get('/email', function(req, res) {
-    var job = jobs.create('email', {
-      title:  'sending an email',
+  web.get('/job/:type', function(req, res) {
+    var type = req.params.type
+    var job = jobs.create(type, {
+      title:  `${type} job`,
     }).save( function(err){
       if( !err ) console.log( job.id );
     });
 
-    res.send(`Sending an email`);
-  })
-
-  web.get('/video', function(req, res) {
-    var job = jobs.create('video', {
-      title:  'processing a video',
-    }).save( function(err){
-      if( !err ) console.log( job.id );
-    });
-
-    res.send(`Processing video`);
+    res.send(`Created a ${type} job`);
   })
 
   web.listen(PORT, function() {

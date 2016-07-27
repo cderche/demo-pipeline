@@ -9,8 +9,7 @@ throng({
 })
 
 function master() {
-  console.log('Worker master');
-  // require('kue').app.listen(3000)
+  if (process.env.NODE_ENV == 'development') require('kue').app.listen(3000);
 }
 
 function start(id) {
